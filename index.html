@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kim Beauty Studio - Agenda Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --rosa-logo: #E8B4BC; --dourado-logo: #D4AF37; --nude: #F8EDE3;
+            --preto: #1A1A1A; --branco: #FFFFFF; --verde-wa: #25D366;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; overflow-x: hidden; }
+        
+        header { 
+            position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.98); 
+            backdrop-filter: blur(20px); z-index: 1000; padding: 1rem 0; box-shadow: 0 2px 20px rgba(232,180,188,0.2);
+        }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { 
+            font-family: 'Great+Vibes', cursive; font-size: 2.2rem; 
+            background: linear-gradient(135deg, var(--rosa-logo), var(--dourado-logo)); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        
+        .btn-wa { 
+            background: var(--verde-wa); color: white; padding: 12px 25px; border-radius: 30px; 
+            text-decoration: none; font-weight: 600; transition: all .3s; box-shadow: 0 5px 15px rgba(37,211,102,0.4);
+        }
+        .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,211,102,0.6); }
+        
+        .hero { 
+            background: linear-gradient(135deg, var(--nude) 0%, var(--rosa-logo) 70%); 
+            padding: 140px 2rem 80px; text-align: center;
+        }
+        .hero h1 { 
+            font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--preto), var(--dourado-logo)); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        
+        .services { padding: 100px 2rem; max-width: 1400px; margin: 0 auto; }
+        .services h2 { text-align: center; font-size: 3rem; margin-bottom: 4rem; color: var(--preto); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem; }
+        .service-card { 
+            background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 20px 60px rgba(232,180,188,0.2);
+            transition: all .4s;
+        }
+        .service-card:hover { transform: translateY(-15px); box-shadow: 0 30px 80px rgba(232,180,188,0.4); }
+        .service-img { height: 220px; width: 100%; object-fit: cover; }
+        .service-content { padding: 2rem; }
+        .service-categoria { font-size: 0.9rem; color: var(--rosa-logo); font-weight: 500; margin-bottom: 0.5rem; }
+        .service-preco { font-size: 2.2rem; font-weight: 700; color: var(--dourado-logo); margin: 1rem 0; }
+        .service-manutencao { font-size: 0.95rem; color: #666; margin-bottom: 1rem; }
+        .service-desc { margin-bottom: 1.5rem; line-height: 1.5; }
+        
+        .agenda { 
+            background: linear-gradient(135deg, var(--rosa-logo), var(--dourado-logo)); 
+            color: white; padding: 100px 2rem; text-align: center;
+        }
+        .agenda h2 { font-size: 3rem; margin-bottom: 2rem; }
+        .agenda-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
+            gap: 1rem; max-width: 1200px; margin: 3rem auto 0;
+        }
+        .slot { 
+            background: rgba(255,255,255,0.2); padding: 1.5rem 0.5rem; border-radius: 15px; 
+            backdrop-filter: blur(10px); cursor: pointer; transition: all .3s; font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .slot:hover { background: rgba(255,255,255,0.4); transform: scale(1.08); }
+        
+        .contato { padding: 80px 2rem; background: var(--nude); text-align: center; }
+        .contato-info { 
+            max-width: 900px; margin: 0 auto 3rem; display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;
+        }
+        .info-card { 
+            background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 15px 40px rgba(232,180,188,0.2);
+            transition: all .3s;
+        }
+        .info-card:hover { transform: translateY(-5px); }
+        .info-icon { font-size: 3rem; color: var(--dourado-logo); margin-bottom: 1rem; }
+        
+        .btn-hero { 
+            display: inline-block; background: linear-gradient(135deg, var(--dourado-logo), #E8C547); 
+            color: var(--preto); padding: 20px 50px; border-radius: 50px; font-size: 1.3rem; 
+            font-weight: 700; text-decoration: none; box-shadow: 0 20px 50px rgba(212,175,55,0.4);
+            transition: all .3s; margin: 1rem;
+        }
+        
+        .whatsapp-float { 
+            position: fixed; width: 70px; height: 70px; bottom: 25px; right: 25px; 
+            background: var(--verde-wa); color: white; border-radius: 50%; font-size: 2rem; 
+            display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(37,211,102,0.5); 
+            z-index: 10000; animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
+        
+        @media (max-width: 768px) { .services-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Kim Beauty Studio</div>
+            <a href="#agendar" class="btn-wa"><i class="fab fa-whatsapp"></i> Agenda</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Kim Beauty Studio</h1>
+        <p style="font-size: 1.4rem; margin-bottom: 2rem;">Lash & Brow Designer Premium | Manaus</p>
+        <a href="#servicos" class="btn-hero">Ver Todos os Serviços</a>
+        <a href="#agendar" class="btn-hero">Reservar Horário</a>
+    </section>
+
+    <!-- SERVIÇOS EXATOS -->
+    <section class="services" id="servicos">
+        <h2>Serviços</h2>
+        <div class="services-grid">
+            <!-- Fio a Fio -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1578643045175-5e14da880d3b?w=800&q=90&fit=crop" alt="Fio a Fio" class="service-img">
+                <div class="service-content">
+                    <div class="service-categoria">CATEGORIA: Natural</div>
+                    <h3>Fio a Fio</h3>
+                    <div class="service-preco">R$ 120,00</div>
+                    <div class="service-manutencao">MANUTENÇÃO: R$80 | 25/30 dias</div>
+                    <p class="service-desc">Técnica perfeita, um cílios delicado e natural que vai combinar com você!</p>
+                    <a href="https://wa.me/5592993114513?text=Fio+a+Fio+R$120" class="btn-wa">Agendar</a>
+                </div>
+            </div>
+
+            <!-- Brasileiro -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1628177753360-5c5f5e8f8e72?w=800&q=90&fit=crop" alt="Brasileiro" class="service-img">
+                <div class="service-content">
+                    <div class="service-categoria">CATEGORIA: Natural</div>
+                    <h3>Brasileiro</h3>
+                    <div class="service-preco">R$ 150,00</div>
+                    <div class="service-manutencao">MANUTENÇÃO: R$80 | 25/30 dias</div>
+                    <p class="service-desc">Resultado leve e natural, realçando sua beleza com delicadeza!</p>
+                    <a href="https://wa.me/5592993114513?text=Brasileiro+R$150" class="btn-wa">Agendar</a>
+                </div>
+            </div>
+
+            <!-- Efeito Rímel -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1608233965292-343d3392df1a?w=800&q=90&fit=crop" alt="Efeito Rímel" class="service-img">
+                <div class="service-content">
+                    <div class="service-categoria">CATEGORIA: Natural</div>
+                    <h3>Efeito Rímel</h3>
+                    <div class="service-preco">R$ 150,00</div>
+                    <div class="service-manutencao">MANUTENÇÃO: R$90 | 25/30 dias</div>
+                    <p class="service-desc">Olhar realçado com cílios definidos, leves e naturais para o seu dia a dia!</p>
+                    <a href="https://wa.me/5592993114513?text=Efeito+R%C3%ADmel+R$150" class="btn-wa">Agendar</a>
+                </div>
+            </div>
+
+            <!-- Lash Lifting -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1579042753991-8f102407e4f4?w=800&q=90&fit=crop" alt="Lash Lifting" class="service-img">
+                <div class="service-content">
+                    <div class="service-categoria">CATEGORIA: Natural</div>
+                    <h3>Lash Lifting</h3>
+                    <div class="service-preco">R$ 150,00</div>
+                    <div class="service-manutencao">MANUTENÇÃO: R$150 | 35/40 dias</div>
+                    <p class="service-desc">Olhar realçado com cílios definidos com técnica específica curvando naturalmente os seus próprios fios!</p>
+                    <a href="https://wa.me/5592993114513?text=Lash+Lifting+R$150" class="btn-wa">Agendar</a>
+                </div>
+            </div>
+
+            <!-- Brow Lamination -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1616652270978-4a2e3d5a777e?w=800&q=90&fit=crop" alt="Brow Lamination" class="service-img">
+                <div class="service-content">
+                    <div class="service-categoria">CATEGORIA: Natural</div>
+                    <h3>Brow Lamination</h3>
+                    <div class="service-preco">R$ 150,00</div>
+                    <div class="service-manutencao">MANUTENÇÃO: R$150 | 35/40 dias (nutrição a cada 10 dias incluso)</div>
+                    <p class="service-desc">Olhar realçado com cílios definidos, leves e naturais para o seu dia a dia!</p>
+                    <a href="https://wa.me/5592993114513?text=Brow+Lamination+R$150" class="btn-wa">Agendar</a>
+                </div>
+            </div>
+
+            <!-- Design Sobrancelha -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1615568534884-8381e989e776?w=800&q=90&fit=crop" alt="Design Sobrancelha" class="service-img">
+                <div class="service-content">
+                    <div class="service-categoria">CATEGORIA: Natural</div>
+                    <h3>Design Sobrancelha</h3>
+                    <div class="service-preco">R$ 40,00</div>
+                    <div class="service-manutencao">MANUTENÇÃO: Semanal (dependendo do crescimento)</div>
+                    <p class="service-desc">Sobrancelhas com design alinhado e personalizado. Sensação de limpeza e autocuidado em dia!</p>
+                    <a href="https://wa.me/5592993114513?text=Design+Sobrancelha+R$40" class="btn-wa">Agendar</a>
+                </div>
+            </div>
+
+            <!-- Design com Henna -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1625772299848-361b803ffa25?w=800&q=90&fit=crop" alt="Design com Henna" class="service-img">
+                <div class="service-content">
+                    <div class="service-categoria">CATEGORIA: Natural ou Intenso</div>
+                    <h3>Design com Henna</h3>
+                    <div class="service-preco">R$ 55,00</div>
+                    <div class="service-manutencao">MANUTENÇÃO: Semanal ou a cada 10 dias</div>
+                    <p class="service-desc">Sobrancelhas com design personalizado, alinhamento e tom da tintura de acordo com sua colorimetria!</p>
+                    <a href="https://wa.me/5592993114513?text=Design+com+Henna+R$55" class="btn-wa">Agendar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Agenda -->
+    <section class="agenda" id="agendar">
+        <h2>Agenda Disponível</h2>
+        <p style="font-size: 1.2rem;">Segunda a Sábado | Clique no horário desejado</p>
+        <div class="agenda-grid">
+            <div class="slot" onclick="reservar('Seg 9h')">Seg 9h</div>
+            <div class="slot" onclick="reservar('Seg 10h')">Seg 10h</div>
+            <div class="slot" onclick="reservar('Seg 11h')">Seg 11h</div>
+            <div class="slot" onclick="reservar('Seg 14h')">Seg 14h</div>
+            <div class="slot" onclick="reservar('Seg 15h')">Seg 15h</div>
+            <div class="slot" onclick="reservar('Seg 16h')">Seg 16h</div>
+            <div class="slot" onclick="reservar('Ter 9h')">Ter 9h</div>
+            <div class="slot" onclick="reservar('Ter 10h')">Ter 10h</div>
+            <div class="slot" onclick="reservar('Ter 14h')">Ter 14h</div>
+            <div class="slot" onclick="reservar('Ter 15h')">Ter 15h</div>
+            <div class="slot" onclick="reservar('Ter 16h')">Ter 16h</div>
+            <div class="slot" onclick="reservar('Qua 9h')">Qua 9h</div>
+            <div class="slot" onclick="reservar('Qua 10h')">Qua 10h</div>
+            <div class="slot" onclick="reservar('Qua 14h')">Qua 14h</div>
+            <div class="slot" onclick="reservar('Qua 15h')">Qua 15h</div>
+            <div class="slot" onclick="reservar('Qua 16h')">Qua 16h</div>
+            <div class="slot" onclick="reservar('Qui 9h')">Qui 9h</div>
+            <div class="slot" onclick="reservar('Qui 10h')">Qui 10h</div>
+            <div class="slot" onclick="reservar('Qui 14h')">Qui 14h</div>
+            <div class="slot" onclick="reservar('Qui 15h')">Qui 15h</div>
+            <div class="slot" onclick="reservar('Qui 16h')">Qui 16h</div>
+            <div class="slot" onclick="reservar('Sex 9h')">Sex 9h</div>
+            <div class="slot" onclick="reservar('Sex 10h')">Sex 10h</div>
+            <div class="slot" onclick="reservar('Sex 14h')">Sex 14h</div>
+            <div class="slot" onclick="reservar('Sex 15h')">Sex 15h</div>
+            <div class="slot" onclick="reservar('Sex 16h')">Sex 16h</div>
+            <div class="slot" onclick="reservar('Sáb 9h')">Sáb 9h</div>
+            <div class="slot" onclick="reservar('Sáb 10h')">Sáb 10h</div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section class="contato">
+        <h2 style="font-size: 2.5rem; margin-bottom: 3rem; color: var(--preto);">Informações</h2>
+        <div class="contato-info">
+            <div class="info-card">
+                <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
+                <h3>(92) 99311-4513</h3>
+                <a href="https://wa.me/5592993114513" class="btn-wa" style="display:block;margin-top:1rem;">Chamar no WhatsApp</a>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fab fa-instagram"></i></div>
+                <h3>@kimbeautystudioam</h3>
+                <a href="https://instagram.com/kimbeautystudioam" target="_blank" class="btn-wa" style="display:block;margin-top:1rem;">Acompanhar no Insta</a>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h3>Rua Coronel Igrejas Lopes 44<br>São Raimundo, Manaus</h3>
+                <a href="https://www.google.com/maps/search/?api=1&query=Rua+Coronel+Igrejas+Lopes+44%2C+S%C3%A3o+Raimundo%2C+Manaus" target="_blank" class="btn-wa" style="display:block;margin-top:1rem;">Abrir Localização</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/5592993114513?text=Oi%20Kim%20Beauty%20Studio!%20Quero%20agendar!" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        function reservar(horario) {
+            window.open(`https://wa.me/5592993114513?text=Quero%20reservar%20${horario}%20no%20Kim%20Beauty%20Studio!`, '_blank');
+        }
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelector(a.getAttribute('href')).scrollIntoView({behavior: 'smooth'});
+            });
+        });
+    </script>
+</body>
+</html>
